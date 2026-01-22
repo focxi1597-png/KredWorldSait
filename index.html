@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KredWorld - Лучший Minecraft сервер 1.16.5</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/732/732221.png">
+    <meta name="description" content="Официальный сайт Minecraft сервера KredWorld версии 1.16.5. Присоединяйся к лучшему игровому опыту!">
+    <meta name="keywords" content="minecraft, сервер, kredworld, 1.16.5, донат, майнкрафт">
+    <meta property="og:title" content="KredWorld - Лучший Minecraft сервер">
+    <meta property="og:description" content="Присоединяйся к KredWorld - самому популярному серверу Minecraft 1.16.5">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="http://kredworld.local">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2a9d8f;
+            --primary-dark: #1d7873;
+            --secondary: #e76f51;
+            --dark: #264653;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #2a9d8f;
+            --danger: #e76f51;
+            --warning: #e9c46a;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Загрузочный экран */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a3341 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .loader-logo span {
+            color: var(--secondary);
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Основные стили */
+        body {
+            background-color: #0f1a20;
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        header {
+            background-color: rgba(15, 26, 32, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Герой-секция */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(15, 26, 32, 0.9), rgba(15, 26, 32, 0.95)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #ccc;
+        }
+
+        .server-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Share buttons */
+        .share-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .share-btn.vk { background: rgba(76, 117, 163, 0.2); }
+        .share-btn.telegram { background: rgba(0, 136, 204, 0.2); }
+        .share-btn.discord { background: rgba(114, 137, 218, 0.2); }
+        .share-btn.copy { background: rgba(42, 157, 143, 0.2); }
+
+        .share-btn.vk:hover { background: rgba(76, 117, 163, 0.4); }
+        .share-btn.telegram:hover { background: rgba(0, 136, 204, 0.4); }
+        .share-btn.discord:hover { background: rgba(114, 137, 218, 0.4); }
+        .share-btn.copy:hover { background: rgba(42, 157, 143, 0.4); }
+
+        /* Server IP section */
+        .server-ip-section {
+            background: rgba(42, 157, 143, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(42, 157, 143, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .ip-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .copy-ip-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .copy-ip-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Доступные донаты */
+        .donations {
+            padding: 100px 0;
+            background-color: #0c1519;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .donation-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .donation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            padding: 25px;
+            text-align: center;
+            background: rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, var(--primary-dark), #165a52);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(42, 157, 143, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, var(--secondary), #d45c3d);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #d45c3d, #b34a2e);
+            box-shadow: 0 7px 15px rgba(231, 111, 81, 0.3);
+        }
+
+        /* Футер */
+        footer {
+            background-color: #080f13;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .server-ip {
+            background: rgba(42, 157, 143, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: monospace;
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            border: 1px solid rgba(42, 157, 143, 0.3);
+        }
+
+        /* Стили для модальных окон */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #0c1519 0%, #0f1a20 100%);
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 20px 30px;
+            background: rgba(42, 157, 143, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        /* Стили для корзины */
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #aaa;
+        }
+        
+        .cart-empty i {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .cart-item-info h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--primary);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-btn:hover {
+            background: rgba(42, 157, 143, 0.4);
+        }
+        
+        .cart-item-quantity span {
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .remove-item {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--secondary);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .remove-item:hover {
+            background: rgba(231, 111, 81, 0.4);
+        }
+        
+        .cart-summary {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+        
+        /* Стили для формы оплаты */
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.2);
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .payment-method {
+            position: relative;
+        }
+        
+        .payment-method input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .payment-method label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .payment-method label i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .payment-method input:checked + label {
+            border-color: var(--primary);
+            background: rgba(42, 157, 143, 0.1);
+        }
+        
+        .order-summary {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .order-items {
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--light);
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-footer {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+        
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Стили для истории покупок */
+        .history-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .history-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #aaa;
+        }
+        
+        .history-empty i {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .history-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .history-date {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .history-details {
+            display: flex;
+            justify-content: space-between;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .history-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-completed {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--primary);
+        }
+        
+        .status-pending {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--warning);
+        }
+        
+        /* Адаптивность модальных окон */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Уведомления */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #0c1519 0%, #0f1a20 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--primary);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            max-width: 500px;
+            animation: slideIn 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification-success {
+            border-left-color: var(--success);
+        }
+        
+        .notification-error {
+            border-left-color: var(--danger);
+        }
+        
+        .notification-info {
+            border-left-color: var(--primary);
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .notification-content i {
+            font-size: 1.5rem;
+        }
+        
+        .notification-success .notification-content i {
+            color: var(--success);
+        }
+        
+        .notification-error .notification-content i {
+            color: var(--danger);
+        }
+        
+        .notification-info .notification-content i {
+            color: var(--primary);
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 15px;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .notification-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: rgba(15, 26, 32, 0.98);
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                transition: 0.3s ease;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .server-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .server-ip-section {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Загрузочный экран -->
+    <div id="loader">
+        <div class="loader-logo">Kred<span>World</span></div>
+        <p>Загрузка лучшего Minecraft опыта...</p>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Навигация -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Kred<span>World</span></a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#donations">Донат</a></li>
+                <li><a href="#about">О сервере</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+                <li id="cartLi" style="display: none;">
+                    <a href="#" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Главная секция -->
+    <section class="hero" id="home">
+        <div class="container fade-in">
+            <h1>Добро пожаловать на KredWorld</h1>
+            <p>Лучший Minecraft сервер версии 1.16.5 с уникальными возможностями, дружным комьюнити и увлекательным геймплеем. Присоединяйся к нам и получи незабываемые эмоции!</p>
+            
+            <!-- IP сервера -->
+            <div class="server-ip-section">
+                <div>
+                    <h3>IP адрес сервера:</h3>
+                    <div class="ip-display" id="serverIpDisplay">play.kredworld.ru</div>
+                </div>
+                <button class="copy-ip-btn" id="copyIpBtn">
+                    <i class="fas fa-copy"></i> Скопировать IP
+                </button>
+            </div>
+            
+            <!-- Кнопки поделиться -->
+            <div class="share-section">
+                <h3>Поделись с друзьями!</h3>
+                <div class="share-buttons">
+                    <a href="#" class="share-btn vk" id="shareVK">
+                        <i class="fab fa-vk"></i> ВКонтакте
+                    </a>
+                    <a href="#" class="share-btn telegram" id="shareTelegram">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="#" class="share-btn discord" id="shareDiscord">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                    <button class="share-btn copy" id="copyLinkBtn">
+                        <i class="fas fa-link"></i> Скопировать ссылку
+                    </button>
+                </div>
+            </div>
+            
+            <div class="server-info">
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>1,250+ игроков</h3>
+                    <p>Активное комьюнити</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>100% защита</h3>
+                    <p>Античит и антилаг</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Множество режимов</h3>
+                    <p>Выживание, приключения и мини-игры</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Доступные донаты -->
+    <section class="donations" id="donations">
+        <div class="container">
+            <h2 class="section-title">Доступные донаты</h2>
+            <p style="text-align: center; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto; color: #ccc;">
+                Поддержите развитие сервера и получите эксклюзивные привилегии! Все средства идут на улучшение инфраструктуры и добавление нового контента.
+            </p>
+            
+            <div class="donation-grid" id="donationGrid">
+                <!-- Карточки донатов будут созданы через JavaScript -->
+            </div>
+            
+            <!-- История покупок -->
+            <div class="history-section" style="margin-top: 80px; padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <h2 class="section-title">История покупок</h2>
+                <div id="purchaseHistory" class="history-container">
+                    <div class="history-empty">
+                        <i class="fas fa-history fa-3x"></i>
+                        <h3>История покупок пуста</h3>
+                        <p>Здесь будут отображаться ваши предыдущие покупки</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KredWorld</h3>
+                    <p>Лучший Minecraft сервер версии 1.16.5 с уникальным геймплеем и дружным сообществом.</p>
+                    <div class="server-ip" id="footerServerIp">play.kredworld.ru</div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#donations">Донат</a></li>
+                        <li><a href="#about">О сервере</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@kredworld.ru</li>
+                        <li><i class="fab fa-discord"></i> Discord: KredWorld</li>
+                        <li><i class="fab fa-vk"></i> Группа ВКонтакте</li>
+                        <li><i class="fab fa-telegram"></i> Telegram-канал</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Платежные системы</h3>
+                    <ul class="footer-links">
+                        <li><i class="fab fa-cc-visa"></i> Visa / Mastercard</li>
+                        <li><i class="fab fa-cc-paypal"></i> PayPal</li>
+                        <li><i class="fas fa-mobile-alt"></i> Мобильные платежи</li>
+                        <li><i class="fab fa-bitcoin"></i> Криптовалюты</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 KredWorld Minecraft Server. Все права защищены. Не является официальным продуктом Mojang.</p>
+                <p>Версия сервера: 1.16.5 | Онлайн: <span id="onlineCount">1250</span> игроков</p>
+                <p id="currentIp">Текущий IP: <span id="ipAddress">Загрузка...</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно корзины -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Корзина покупок</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cartEmpty" class="cart-empty">
+                    <i class="fas fa-shopping-cart fa-3x"></i>
+                    <h3>Корзина пуста</h3>
+                    <p>Добавьте донат-пакеты из списка выше</p>
+                </div>
+                <div id="cartContent" class="cart-content" style="display: none;">
+                    <div id="cartItems"></div>
+                    <div class="cart-summary">
+                        <div class="cart-total">
+                            <span>Итого:</span>
+                            <span id="cartTotal">0 ₽</span>
+                        </div>
+                        <button id="checkoutBtn" class="btn btn-secondary">Перейти к оплате</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно оплаты -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content payment-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-credit-card"></i> Оформление заказа</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="form-section">
+                        <h3>Информация об игроке</h3>
+                        <div class="form-group">
+                            <label for="playerNickname">Никнейм в Minecraft *</label>
+                            <input type="text" id="playerNickname" required placeholder="Введите ваш ник">
+                        </div>
+                        <div class="form-group">
+                            <label for="playerEmail">Email *</label>
+                            <input type="email" id="playerEmail" required placeholder="example@mail.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Метод оплаты</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method">
+                                <input type="radio" id="card" name="paymentMethod" value="card" checked>
+                                <label for="card">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    Банковская карта
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="yoomoney" name="paymentMethod" value="yoomoney">
+                                <label for="yoomoney">
+                                    <i class="fas fa-wallet"></i>
+                                    ЮMoney
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="qiwi" name="paymentMethod" value="qiwi">
+                                <label for="qiwi">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    QIWI
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="crypto" name="paymentMethod" value="crypto">
+                                <label for="crypto">
+                                    <i class="fab fa-bitcoin"></i>
+                                    Криптовалюта
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="cardDetails" class="form-section">
+                        <h3>Данные карты</h3>
+                        <div class="form-group">
+                            <label for="cardNumber">Номер карты *</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Срок действия *</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCVC">CVC *</label>
+                                <input type="text" id="cardCVC" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <h3>Ваш заказ</h3>
+                        <div id="orderItems"></div>
+                        <div class="order-total">
+                            <span>Общая сумма:</span>
+                            <span id="orderTotal">0 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit" id="confirmPayment" class="btn">Оплатить</button>
+                        <button type="button" id="cancelPayment" class="btn btn-cancel">Отмена</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Конфигурация сервера
+        const SERVER_CONFIG = {
+            name: "KredWorld",
+            ip: "play.kredworld.ru",
+            version: "1.16.5",
+            website: window.location.href,
+            online: 1250,
+            maxOnline: 2000,
+            discord: "https://discord.gg/kredworld",
+            vk: "https://vk.com/kredworld",
+            telegram: "https://t.me/kredworld"
+        };
+
+        // Данные донатных пакетов
+        const donationPackages = [
+            {
+                id: 1,
+                name: "Стартовый",
+                price: 99,
+                features: ["Префикс в чате", "Цветной ник", "Доступ к /hat", "3 ключа от кейсов"],
+                popular: false
+            },
+            {
+                id: 2,
+                name: "Игрок",
+                price: 199,
+                features: ["Все из предыдущего", "Доступ к /fly", "Дополнительные варпы", "7 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 3,
+                name: "Ветеран",
+                price: 349,
+                features: ["Все из предыдущего", "Доп. наборы ресурсов", "Доступ к /fix", "15 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 4,
+                name: "Мастер",
+                price: 499,
+                features: ["Все из предыдущего", "Эксклюзивный плащ", "Личный питомец", "25 ключей от кейсов"],
+                popular: true
+            },
+            {
+                id: 5,
+                name: "Легенда",
+                price: 799,
+                features: ["Все из предыдущего", "Доступ к /ec", "Личные эффекты", "50 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 6,
+                name: "Император",
+                price: 1299,
+                features: ["Все из предыдущего", "Личный остров в SkyBlock", "Ускорение ферм x2", "100 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 7,
+                name: "Бог",
+                price: 1999,
+                features: ["Все из предыдущего", "VIP-комната в лобби", "Личный цвет в чате", "200 ключей от кейсов"],
+                popular: true
+            },
+            {
+                id: 8,
+                name: "Творец",
+                price: 2999,
+                features: ["Все из предыдущего", "Создание личной команды", "Доступ к приватным играм", "350 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 9,
+                name: "Властелин",
+                price: 4999,
+                features: ["Все из предыдущего", "Уникальный титул", "Личный контент-менеджер", "500 ключей от кейсов"],
+                popular: false
+            },
+            {
+                id: 10,
+                name: "Абсолют",
+                price: 9999,
+                features: ["ВСЕ доступные привилегии", "Личный NPC на сервере", "Участие в разработке", "1000 ключей от кейсов"],
+                popular: true
+            }
+        ];
+
+        // Корзина покупок
+        let cart = [];
+        let purchaseHistory = [];
+
+        // Инициализация после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация сервера
+            initServerInfo();
+            
+            // Загрузка данных из localStorage
+            loadFromStorage();
+            
+            // Создание карточек донатов
+            createDonationCards();
+            
+            // Обновление отображения корзины
+            updateCartDisplay();
+            
+            // Настройка кнопок "поделиться"
+            setupShareButtons();
+            
+            // Настройка мобильного меню
+            setupMobileMenu();
+            
+            // Настройка плавной прокрутки
+            setupSmoothScroll();
+            
+            // Настройка модальных окон
+            setupModals();
+            
+            // Загрузка начального экрана
+            setupLoader();
+            
+            // Обновление онлайн игроков (имитация)
+            updateOnlinePlayers();
+        });
+
+        // Инициализация информации о сервере
+        function initServerInfo() {
+            document.getElementById('serverIpDisplay').textContent = SERVER_CONFIG.ip;
+            document.getElementById('footerServerIp').textContent = SERVER_CONFIG.ip;
+            document.getElementById('onlineCount').textContent = SERVER_CONFIG.online;
+            
+            // Получение IP пользователя
+            getUserIP();
+        }
+
+        // Получение IP пользователя
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ipAddress').textContent = data.ip;
+            } catch (error) {
+                document.getElementById('ipAddress').textContent = 'Не удалось определить';
+            }
+        }
+
+        // Создание карточек донатов
+        function createDonationCards() {
+            const donationGrid = document.getElementById('donationGrid');
+            
+            donationPackages.forEach(pkg => {
+                const cardHTML = `
+                    <div class="donation-card fade-in">
+                        <div class="card-header">
+                            ${pkg.popular ? '<div style="position: absolute; top: 10px; right: 10px; background: var(--secondary); color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">ПОПУЛЯРНЫЙ</div>' : ''}
+                            <h3>${pkg.name}</h3>
+                            <div class="price">${pkg.price} <span>₽</span></div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="features">
+                                ${pkg.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                            </ul>
+                            <button class="btn ${pkg.id === 10 ? 'btn-secondary' : ''}" data-id="${pkg.id}">
+                                ${pkg.id === 10 ? 'Купить сейчас' : 'Добавить в корзину'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                donationGrid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+            // Добавляем обработчики для кнопок
+            document.querySelectorAll('.donation-card .btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const packageId = parseInt(this.getAttribute('data-id'));
+                    const packageItem = donationPackages.find(p => p.id === packageId);
+                    
+                    if (packageItem) {
+                        addToCart(packageItem);
+                        showNotification(`Донат "${packageItem.name}" добавлен в корзину!`, 'success');
+                    }
+                });
+            });
+        }
+
+        // Добавление в корзину
+        function addToCart(packageItem) {
+            // Показываем иконку корзины, если она скрыта
+            document.getElementById('cartLi').style.display = 'block';
+            
+            // Проверяем, есть ли уже такой пакет в корзине
+            const existingItemIndex = cart.findIndex(item => item.id === packageItem.id);
+            
+            if (existingItemIndex !== -1) {
+                // Увеличиваем количество
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                // Добавляем новый товар
+                cart.push({
+                    ...packageItem,
+                    quantity: 1,
+                    addedAt: new Date()
+                });
+            }
+            
+            // Обновляем отображение корзины
+            updateCartDisplay();
+            
+            // Сохраняем в localStorage
+            saveToStorage();
+        }
+
+        // Обновление отображения корзины
+        function updateCartDisplay() {
+            // Обновляем счетчик в иконке корзины
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+            
+            // Обновляем модальное окно корзины
+            updateCartModal();
+        }
+
+        // Обновление модального окна корзины
+        function updateCartModal() {
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartContent = document.getElementById('cartContent');
+            const cartItems = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartEmpty.style.display = 'block';
+                cartContent.style.display = 'none';
+            } else {
+                cartEmpty.style.display = 'none';
+                cartContent.style.display = 'block';
+                
+                // Очищаем содержимое
+                cartItems.innerHTML = '';
+                
+                // Добавляем товары
+                let totalPrice = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    totalPrice += itemTotal;
+                    
+                    const cartItemHTML = `
+                        <div class="cart-item" data-id="${item.id}">
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <p>${item.price} ₽ × ${item.quantity}</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="cart-item-price">${itemTotal} ₽</div>
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                </div>
+                                <button class="remove-item" data-id="${item.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    cartItems.insertAdjacentHTML('beforeend', cartItemHTML);
+                });
+                
+                // Обновляем итоговую сумму
+                document.getElementById('cartTotal').textContent = `${totalPrice} ₽`;
+                
+                // Добавляем обработчики событий для кнопок
+                setupCartItemEvents();
+            }
+        }
+
+        // Настройка событий для элементов корзины
+        function setupCartItemEvents() {
+            // Кнопки увеличения/уменьшения количества
+            document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === itemId);
+                    
+                    if (item) {
+                        updateCartItemQuantity(itemId, item.quantity - 1);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    const item = cart.find(item => item.id === itemId);
+                    
+                    if (item) {
+                        updateCartItemQuantity(itemId, item.quantity + 1);
+                    }
+                });
+            });
+            
+            // Кнопки удаления
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(itemId);
+                });
+            });
+        }
+
+        // Обновление количества товара
+        function updateCartItemQuantity(itemId, newQuantity) {
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            
+            if (itemIndex !== -1) {
+                if (newQuantity < 1) {
+                    removeFromCart(itemId);
+                } else {
+                    cart[itemIndex].quantity = newQuantity;
+                    updateCartDisplay();
+                    saveToStorage();
+                }
+            }
+        }
+
+        // Удаление из корзины
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCartDisplay();
+            saveToStorage();
+            
+            // Скрываем иконку корзины, если она пуста
+            if (cart.length === 0) {
+                document.getElementById('cartLi').style.display = 'none';
+            }
+        }
+
+        // Настройка кнопок "поделиться"
+        function setupShareButtons() {
+            const shareText = `Присоединяйся к лучшему Minecraft серверу KredWorld ${SERVER_CONFIG.version}! IP: ${SERVER_CONFIG.ip}`;
+            const shareUrl = SERVER_CONFIG.website;
+            
+            // ВКонтакте
+            document.getElementById('shareVK').addEventListener('click', function(e) {
+                e.preventDefault();
+                const vkUrl = `https://vk.com/share.php?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(`KredWorld Minecraft Server`)}&description=${encodeURIComponent(shareText)}`;
+                window.open(vkUrl, '_blank', 'width=600,height=400');
+            });
+            
+            // Telegram
+            document.getElementById('shareTelegram').addEventListener('click', function(e) {
+                e.preventDefault();
+                const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+                window.open(telegramUrl, '_blank', 'width=600,height=400');
+            });
+            
+            // Discord
+            document.getElementById('shareDiscord').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Для Discord можно использовать invite ссылку
+                if (SERVER_CONFIG.discord) {
+                    window.open(SERVER_CONFIG.discord, '_blank');
+                } else {
+                    showNotification('Ссылка на Discord сервер не настроена', 'info');
+                }
+            });
+            
+            // Копировать ссылку
+            document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                navigator.clipboard.writeText(shareUrl)
+                    .then(() => showNotification('Ссылка скопирована в буфер обмена!', 'success'))
+                    .catch(() => showNotification('Не удалось скопировать ссылку', 'error'));
+            });
+            
+            // Копировать IP
+            document.getElementById('copyIpBtn').addEventListener('click', function() {
+                navigator.clipboard.writeText(SERVER_CONFIG.ip)
+                    .then(() => showNotification('IP адрес скопирован в буфер обмена!', 'success'))
+                    .catch(() => showNotification('Не удалось скопировать IP', 'error'));
+            });
+        }
+
+        // Настройка мобильного меню
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
+
+        // Настройка плавной прокрутки
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Настройка модальных окон
+        function setupModals() {
+            // Модальное окно корзины
+            const cartModal = document.getElementById('cartModal');
+            const cartIcon = document.getElementById('cartIcon');
+            const closeCartModal = document.querySelector('#cartModal .close-modal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            // Открытие корзины
+            cartIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                cartModal.style.display = 'block';
+            });
+            
+            // Закрытие корзины
+            closeCartModal.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+            });
+            
+            // Переход к оплате
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    showNotification('Корзина пуста! Добавьте товары перед оплатой.', 'error');
+                    return;
+                }
+                
+                cartModal.style.display = 'none';
+                openPaymentModal();
+            });
+            
+            // Модальное окно оплаты
+            const paymentModal = document.getElementById('paymentModal');
+            const closePaymentModal = document.querySelector('#paymentModal .close-modal');
+            const cancelPaymentBtn = document.getElementById('cancelPayment');
+            const paymentForm = document.getElementById('paymentForm');
+            
+            // Закрытие окна оплаты
+            closePaymentModal.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+            
+            cancelPaymentBtn.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+            
+            // Обработка формы оплаты
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                processPayment();
+            });
+            
+            // Закрытие при клике вне окна
+            window.addEventListener('click', function(e) {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+                if (e.target === paymentModal) {
+                    paymentModal.style.display = 'none';
+                }
+            });
+            
+            // Изменение метода оплаты
+            document.querySelectorAll('input[name="paymentMethod"]').forEach(method => {
+                method.addEventListener('change', function() {
+                    updatePaymentMethodDetails(this.value);
+                });
+            });
+            
+            // Маски для полей карты
+            document.getElementById('cardNumber')?.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = value.substring(0, 19);
+            });
+            
+            document.getElementById('cardExpiry')?.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value.substring(0, 5);
+            });
+            
+            document.getElementById('cardCVC')?.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+            });
+        }
+
+        // Обновление деталей оплаты
+        function updatePaymentMethodDetails(method) {
+            const cardDetails = document.getElementById('cardDetails');
+            cardDetails.style.display = method === 'card' ? 'block' : 'none';
+        }
+
+        // Открытие модального окна оплаты
+        function openPaymentModal() {
+            const paymentModal = document.getElementById('paymentModal');
+            const orderItems = document.getElementById('orderItems');
+            const orderTotal = document.getElementById('orderTotal');
+            
+            // Заполняем информацию о заказе
+            orderItems.innerHTML = '';
+            let totalPrice = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+                
+                const orderItemHTML = `
+                    <div class="order-item">
+                        <span>${item.name} × ${item.quantity}</span>
+                        <span>${itemTotal} ₽</span>
+                    </div>
+                `;
+                
+                orderItems.insertAdjacentHTML('beforeend', orderItemHTML);
+            });
+            
+            // Устанавливаем итоговую сумму
+            orderTotal.textContent = `${totalPrice} ₽`;
+            
+            // Очищаем форму
+            document.getElementById('paymentForm').reset();
+            updatePaymentMethodDetails('card');
+            
+            // Показываем окно
+            paymentModal.style.display = 'block';
+        }
+
+        // Обработка оплаты
+        function processPayment() {
+            const playerNickname = document.getElementById('playerNickname').value.trim();
+            const playerEmail = document.getElementById('playerEmail').value.trim();
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            // Валидация
+            if (!playerNickname || !playerEmail) {
+                showNotification('Пожалуйста, заполните все обязательные поля.', 'error');
+                return;
+            }
+            
+            // Имитация процесса оплаты
+            showNotification('Идет обработка платежа...', 'info');
+            
+            // Имитация задержки
+            setTimeout(() => {
+                // Создаем покупку
+                const purchase = {
+                    id: Date.now(),
+                    items: [...cart],
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    playerNickname,
+                    playerEmail,
+                    paymentMethod,
+                    date: new Date(),
+                    status: 'completed'
+                };
+                
+                // Добавляем в историю
+                purchaseHistory.push(purchase);
+                
+                // Очищаем корзину
+                cart = [];
+                
+                // Обновляем отображение
+                updateCartDisplay();
+                displayPurchaseHistory();
+                
+                // Сохраняем в localStorage
+                saveToStorage();
+                
+                // Закрываем окно оплаты
+                document.getElementById('paymentModal').style.display = 'none';
+                
+                // Показываем успешное сообщение
+                showNotification(`Оплата прошла успешно! Привилегии будут выданы игроку ${playerNickname} в течение 5 минут.`, 'success');
+                
+                // Показываем детали покупки
+                setTimeout(() => {
+                    showPurchaseDetails(purchase);
+                }, 1000);
+            }, 2000);
+        }
+
+        // Показ деталей покупки
+        function showPurchaseDetails(purchase) {
+            const itemsList = purchase.items.map(item => 
+                `${item.name} (${item.quantity} шт.) - ${item.price * item.quantity} ₽`
+            ).join('<br>');
+            
+            const paymentMethodsMap = {
+                'card': 'Банковская карта',
+                'yoomoney': 'ЮMoney',
+                'qiwi': 'QIWI',
+                'crypto': 'Криптовалюта'
+            };
+            
+            const detailsHTML = `
+                <div style="text-align: left;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Детали покупки</h3>
+                    <p><strong>ID заказа:</strong> ${purchase.id}</p>
+                    <p><strong>Игрок:</strong> ${purchase.playerNickname}</p>
+                    <p><strong>Email:</strong> ${purchase.playerEmail}</p>
+                    <p><strong>Способ оплаты:</strong> ${paymentMethodsMap[purchase.paymentMethod]}</p>
+                    <p><strong>Дата:</strong> ${purchase.date.toLocaleString()}</p>
+                    <p><strong>Статус:</strong> <span style="color: var(--success); font-weight: bold;">Завершено</span></p>
+                    <p><strong>Товары:</strong><br>${itemsList}</p>
+                    <p><strong>Итоговая сумма:</strong> ${purchase.total} ₽</p>
+                </div>
+            `;
+            
+            showNotification(detailsHTML, 'info', 10000);
+        }
+
+        // Отображение истории покупок
+        function displayPurchaseHistory() {
+            const purchaseHistoryElement = document.getElementById('purchaseHistory');
+            
+            if (purchaseHistory.length === 0) {
+                purchaseHistoryElement.innerHTML = `
+                    <div class="history-empty">
+                        <i class="fas fa-history fa-3x"></i>
+                        <h3>История покупок пуста</h3>
+                        <p>Здесь будут отображаться ваши предыдущие покупки</p>
+                    </div>
+                `;
+            } else {
+                let historyHTML = '';
+                
+                // Сортируем покупки по дате (новые сначала)
+                const sortedHistory = [...purchaseHistory].sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                sortedHistory.forEach(purchase => {
+                    const date = new Date(purchase.date);
+                    const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                    
+                    // Формируем список товаров
+                    const itemsList = purchase.items.map(item => 
+                        `${item.name} × ${item.quantity}`
+                    ).join(', ');
+                    
+                    historyHTML += `
+                        <div class="history-item">
+                            <div class="history-header">
+                                <div class="history-title">Заказ #${purchase.id}</div>
+                                <div class="history-date">${formattedDate}</div>
+                            </div>
+                            <div class="history-details">
+                                <div>Игрок: ${purchase.playerNickname}</div>
+                                <div>${purchase.total} ₽</div>
+                            </div>
+                            <div style="margin-bottom: 10px; color: #ccc; font-size: 0.9rem;">
+                                ${itemsList}
+                            </div>
+                            <div class="history-status status-${purchase.status}">
+                                ${purchase.status === 'completed' ? 'Завершено' : 'В обработке'}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                purchaseHistoryElement.innerHTML = historyHTML;
+            }
+        }
+
+        // Уведомления
+        function showNotification(message, type = 'info', duration = 3000) {
+            // Удаляем предыдущие уведомления
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            
+            // Иконки для разных типов уведомлений
+            const icons = {
+                'success': 'fas fa-check-circle',
+                'error': 'fas fa-exclamation-circle',
+                'info': 'fas fa-info-circle'
+            };
+            
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="${icons[type] || icons.info}"></i>
+                    <div>${message}</div>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Кнопка закрытия
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.remove();
+            });
+            
+            // Автоматическое закрытие
+            if (duration > 0) {
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => {
+                            if (notification.parentNode) {
+                                notification.remove();
+                            }
+                        }, 300);
+                    }
+                }, duration);
+            }
+            
+            // Добавляем анимацию закрытия
+            if (!document.querySelector('#notification-close-animation')) {
+                const closeStyle = document.createElement('style');
+                closeStyle.id = 'notification-close-animation';
+                closeStyle.textContent = `
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(closeStyle);
+            }
+        }
+
+        // Сохранение данных
+        function saveToStorage() {
+            try {
+                localStorage.setItem('kredworld_cart', JSON.stringify(cart));
+                localStorage.setItem('kredworld_purchase_history', JSON.stringify(purchaseHistory));
+            } catch (e) {
+                console.error('Ошибка при сохранении в localStorage:', e);
+            }
+        }
+
+        // Загрузка данных
+        function loadFromStorage() {
+            try {
+                const savedCart = localStorage.getItem('kredworld_cart');
+                const savedHistory = localStorage.getItem('kredworld_purchase_history');
+                
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    if (cart.length > 0) {
+                        document.getElementById('cartLi').style.display = 'block';
+                    }
+                }
+                
+                if (savedHistory) {
+                    purchaseHistory = JSON.parse(savedHistory);
+                    displayPurchaseHistory();
+                }
+            } catch (e) {
+                console.error('Ошибка при загрузке из localStorage:', e);
+            }
+        }
+
+        // Настройка загрузочного экрана
+        function setupLoader() {
+            const loader = document.getElementById('loader');
+            const progress = document.querySelector('.progress');
+            
+            // Имитация загрузки
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 2;
+                progress.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 500);
+                    }, 300);
+                }
+            }, 30);
+        }
+
+        // Обновление онлайн игроков (имитация)
+        function updateOnlinePlayers() {
+            setInterval(() => {
+                const onlineElement = document.getElementById('onlineCount');
+                if (onlineElement) {
+                    const currentOnline = parseInt(onlineElement.textContent);
+                    const change = Math.floor(Math.random() * 21) - 10; // -10 до +10
+                    const newOnline = Math.max(800, Math.min(1500, currentOnline + change));
+                    onlineElement.textContent = newOnline;
+                }
+            }, 30000); // Обновление каждые 30 секунд
+        }
+
+        // Экспорт функций для отладки
+        window.donationSystem = {
+            cart,
+            purchaseHistory,
+            donationPackages,
+            SERVER_CONFIG,
+            addToCart,
+            removeFromCart,
+            updateCartItemQuantity,
+            clearCart: function() {
+                cart = [];
+                document.getElementById('cartLi').style.display = 'none';
+                updateCartDisplay();
+                saveToStorage();
+            },
+            clearHistory: function() {
+                purchaseHistory = [];
+                displayPurchaseHistory();
+                saveToStorage();
+            }
+        };
+    </script>
+</body>
+</html>
